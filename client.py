@@ -234,14 +234,18 @@ If you don't need a tool, respond normally.
                 self.logger.info("Fetching tools from server...")
                 try:
                     self.tools = await client.list_tools()
-                    print(f"✓ Connected to MCP server. {len(self.tools)} tools available:")
-                    for tool in self.tools:
-                        # print(f"  - {tool.name}: {tool.description}")
-                        print(f"  - {tool.name}")
+                    # print(f"✓ Connected to MCP server. {len(self.tools)} tools available:")
                 except Exception as e:
                     self.logger.error(f"Failed to list tools: {e}")
                     print(f"⚠️  Warning: Could not fetch tools from server")
                     self.tools = []
+
+            for tool in self.tools:
+                print(f"[{tool.name}]")
+                print()
+                print(f"{tool.description}")
+                print()
+                print()
 
     async def chat(self, user_message: str, max_iterations: int = 5):
         """Handle a conversation with tool calls"""
